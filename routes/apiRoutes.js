@@ -10,4 +10,12 @@ module.exports = function(app) {
         res.json(noteData);
     });
 
+    // API POST Requests to handle the note that the user submits and 
+    // send those data to the server.
+    app.post("/api/notes", function(req, res) {
+        
+        noteData.push(req.body);
+
+        res.json(noteData);
+    });
 };
