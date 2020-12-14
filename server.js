@@ -16,3 +16,8 @@ app.use(express.json());
 // or request data from various URLs.
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
+
+// listener to start the server.
+app.listen(PORT, function() {
+    console.log("App listening on PORT: " + PORT);
+});
