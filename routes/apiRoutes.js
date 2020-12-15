@@ -14,8 +14,12 @@ module.exports = function(app) {
     // send those data to the server.
     app.post("/api/notes", function(req, res) {
         
-        noteData.push(req.body);
+        let newNotes = req.body;
 
-        res.json(noteData);
+        console.log(newNotes);
+
+        noteData.push(newNotes);
+
+        res.json(newNotes);
     });
 };
