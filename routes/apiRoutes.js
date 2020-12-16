@@ -24,13 +24,20 @@ module.exports = function(app) {
     // API POST Requests to handle the note that the user submits and 
     // send those data to the server.
     app.post("/api/notes", function(req, res) {
-        
-        let newNotes = req.body;
 
-        console.log(newNotes);
+        let uniqueId = 0;
+        for(let i = 0; noteData.length; i++) {
 
-        noteData.push(newNotes);
+            let note = noteData[i];
+            if(note.id > uniqueId) {
+                uniqueId = note.id;
+            };
+        };
 
-        res.json(newNotes);
+        let newNotes = {
+            id: uniqueId + 1,
+            title: req.body.title,
+            text: req.body.text
+        };
     });
 };
