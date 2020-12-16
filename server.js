@@ -12,6 +12,9 @@ const PORT = process.env.PORT || 3001;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// Express.static built-in function to serve static files
+app.use(express.static('public'));
+
 // Series of route files which give a server a map of how to respond when users visit
 // or request data from various URLs.
 require("./routes/apiRoutes")(app);
