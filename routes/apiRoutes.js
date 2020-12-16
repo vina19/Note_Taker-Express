@@ -1,3 +1,9 @@
+// Require fs to read and write the database.
+const fs = require("fs");
+
+// Require path for mapping to where the database located.
+const path = requite("path");
+
 // Linking the routes to the data source.
 const noteData = require("../db/db.json");
 
