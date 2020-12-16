@@ -17,7 +17,6 @@ module.exports = function(app) {
 
         fs.readFile("./db/db.json", (err, data) => {
             if (err) throw err;
-            
             res.json(JSON.parse(data));
         });
     });
