@@ -2,7 +2,7 @@
 const fs = require("fs");
 
 // Require path for mapping to where the database located.
-const path = requite("path");
+const path = require("path");
 
 // Linking the routes to the data source.
 const noteData = require("../db/db.json");
@@ -11,9 +11,15 @@ const noteData = require("../db/db.json");
 module.exports = function(app) {
     
     // API GET Requests to get the data and show it to the user when
-    // the user visit the site
-    app.get("/api/notes", function(req, res) {
-        res.json(noteData);
+    // the user visit the site.
+    // Retrieve the data notes from the database using fs readFile module. 
+    app.get("/api/notes", (req, res) => {
+
+        fs.readFile("./db/db.json", (err, data) => {
+            if (err) throw err;
+            
+            res.json(JSON.parse(data));
+        });
     });
 
     // API POST Requests to handle the note that the user submits and 
