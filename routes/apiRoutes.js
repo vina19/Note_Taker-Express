@@ -23,36 +23,19 @@ module.exports = function(app) {
 
     // API POST Requests to handle the note that the user submits and 
     // send those data to the server.
-    app.post("/api/notes", function(req, res) {
-
-        let uniqueId = 0;
-        for(let i = 0; noteData.length; i++) {
-
-            let note = noteData[i];
-            if(note.id > uniqueId) {
-                uniqueId = note.id;
-            };
-        };
-
-        let newNotes = {
-            id: uniqueId + 1,
-            title: req.body.title,
-            text: req.body.text
-        };
+    app.post("/api/notes", (req, res) => {
 
         fs.readFile("./db/db.json", (err, data) => {
             
             if (err) throw err;
 
-            const notes = JSON.parse(data);
+            let notes = JSON.parse(data);
 
-            notes.push(newNotes);
+            notes.push(req.body);
 
-            fs.writeFile("./db/db.json", JSON.stringify(notes, null, 2), err => {
-                if (err) throw err;
-                res.send(noteData);
-                console.log("Your note is successfully saved!");
-            });
+            for(let i = 0; i < notes.length; i++) {
+                notes[i].id = i + 1;
+            };
         });
     });
 };
