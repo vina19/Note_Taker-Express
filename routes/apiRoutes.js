@@ -50,4 +50,24 @@ module.exports = function(app) {
             });
         });
     });
+
+    // Delete the notes by its id 
+    app.delete("/api/notes/:id", (req, res) => {
+
+        // Read the database and get the note with the given id
+        fs.readFile("./db/db.json", (err, data) => {
+
+            if (err) throw err;
+
+            let notes = JSON.parse(data);
+            
+            for(let i = 0; i < notes.length; i++) {
+            
+                if(notes[i].id == req.params.id) {
+                    notes.splice(i, 1);
+                    break;
+                };
+            };
+        });
+    });
 };
