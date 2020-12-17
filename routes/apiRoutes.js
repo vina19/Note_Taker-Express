@@ -25,6 +25,9 @@ module.exports = function(app) {
     // send those data to the server.
     app.post("/api/notes", (req, res) => {
 
+        // Read the database and retrieve notes body and 
+        // set the number id to the notes body by looping the
+        // notes array and increment the id number by one. 
         fs.readFile("./db/db.json", (err, data) => {
             
             if (err) throw err;
@@ -36,6 +39,15 @@ module.exports = function(app) {
             for(let i = 0; i < notes.length; i++) {
                 notes[i].id = i + 1;
             };
+
+            // Rewrite the database with all the notes body and
+            // the added unique id in the body,
+            // and send those updated notes body to the database.
+            fs.writeFile("./db/db.json", JSON.stringify(notes), err => {
+                if (err) throw err;
+                res.send(noteData);
+                console.log("Your note is successfully saved!");
+            });
         });
     });
 };
