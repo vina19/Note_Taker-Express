@@ -39,5 +39,20 @@ module.exports = function(app) {
             title: req.body.title,
             text: req.body.text
         };
+
+        fs.readFile("./db/db.json", (err, data) => {
+            
+            if (err) throw err;
+
+            const notes = JSON.parse(data);
+
+            notes.push(newNotes);
+
+            fs.writeFile("./db/db.json", JSON.stringify(notes, null, 2), err => {
+                if (err) throw err;
+                res.send(noteData);
+                console.log("Your note is successfully saved!");
+            });
+        });
     });
 };
