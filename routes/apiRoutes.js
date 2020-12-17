@@ -54,7 +54,7 @@ module.exports = function(app) {
     // Delete the notes by its id 
     app.delete("/api/notes/:id", (req, res) => {
 
-        // Read the database and get the note with the given id
+        // Read the database and get the note with the given id to be removed.
         fs.readFile("./db/db.json", (err, data) => {
 
             if (err) throw err;
@@ -68,7 +68,11 @@ module.exports = function(app) {
                     break;
                 };
             };
-            
+
+            // Rewrite the notes to the database file.
+            fs.writeFile("./db/db.json", JSON.stringify(notes), (err) => 
+                err ? console.log(err) : res.send(notes)
+            );
         });
     });
 };
