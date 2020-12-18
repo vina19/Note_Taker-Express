@@ -1,7 +1,7 @@
 # Note_Taker-Express
 ### ![MIT License](https://img.shields.io/static/v1?label=License&message=MIT&color=yellow)
 ## Description
-#### 
+#### This repository is where I created a note taker for the user who wanted to create a note and save them for a future use. In this application, the user would be able to add a notes which will automatically saved and deleted the selected notes that they would like to delete.
 
 ## Table of Content
 #### 1. [Installation](##Installation) 
